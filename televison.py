@@ -1,4 +1,4 @@
-class Televison:
+class Television:
     MIN_VOLUME = 0
     MAX_VOLUME = 20 #max level of volume
     MIN_CHANNEL = 0
@@ -20,19 +20,19 @@ class Televison:
         """
         self._status = self.power
 
-    def mute(self):
+    def mute(self) -> None:
         """
         Turns volume off or returns it to previous volume level
         """
         if self._status:
             self._status = self._muted
 
-    def channel_up (self):
+    def channel_up (self, televison=None):
         """
         increases the channel by 1. When top channel reached, loops to the bottom channel.
         """
         if self._status:
-            self._channel = (self._channel + 1) % (Televison.MAX_CHANNEL + 1)
+            self._channel = (self._channel + 1) % (televison.MAX_CHANNEL + 1)
 
     def channel_down(self):
         """
@@ -52,19 +52,23 @@ class Televison:
             if self._volume < Television.MAX_VOLUME:
                 self._volume += 1
 
-    def volume_down(self):
+    def volume_down(self, televison=None):
         """
         Decrease the volume.Unmute if the TV was muted.
         """
         if self._status:
             self._muted = False
-            if self._volume > Televison.MIN_VOLUME:
+            if self._volume > televison.MIN_VOLUME:
                 self._volume -= 1
 
 
-    def __str__(self):
+    def __str__(self, televison=None) -> str:
+        """
+        Method to show the tv status.
+        :return:tv status.
+        """
         if self._muted:
-            return f'Volume = {Televison.MIN_VOLUME}'
+            return f'Volume = {televison.MIN_VOLUME}'
         else:
             return f'Power = {self._status}, Volume = {self._volume}, Channel = {self._channel}'
 
