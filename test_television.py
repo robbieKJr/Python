@@ -4,7 +4,7 @@ from televison import televison  # import statement needed to gain access to Tel
 
 class Test:
     def __init__(self):
-        self.tvl = None
+        self.__tvl = None
         self.__mute = False
         self.__volume = 0
         self.__channel = 0
